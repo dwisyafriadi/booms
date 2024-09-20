@@ -9,6 +9,14 @@ Multi Account ✅
 
 [Playing Games](https://t.me/booms_io_bot/start?startapp=bro1580490871)
 
+## Join Game
+Save your query into tgwebappdata.txt
+
+``git clone https://github.com/dwisyafriadi/booms.git
+``cd booms
+``python booms.py
+
+
 ## Join the telegram channel for another bot
 
 [Join my Telegram channel](https://t.me/dasarpemulung)
