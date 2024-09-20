@@ -1,20 +1,28 @@
 # Booms
 
-Auto Clear Task ✅  
-Auto Tap-tap ✅
-Auto Upgrade ✅
-Multi Account ✅
+### Fitur:
+- Auto Clear Task ✅
+- Auto Tap-tap ✅
+- Auto Upgrade ✅
+- Multi Account ✅
+
+## Cara Menggunakan
+
+1. **Clone repository ini:**
+   ```bash
+   git clone https://github.com/dwisyafriadi/booms.git
+
+2. **Go To Directory:**
+   ```bash
+   cd booms
+   
+3. **Play Bot**
+   ```bash
+   python booms.pys
 
 ## Join Game
 
 [Playing Games](https://t.me/booms_io_bot/start?startapp=bro1580490871)
-
-## Join Game
-Save your query into tgwebappdata.txt
-
-``git clone https://github.com/dwisyafriadi/booms.git
-``cd booms
-``python booms.py
 
 
 ## Join the telegram channel for another bot
@@ -25,6 +33,4 @@ Save your query into tgwebappdata.txt
 
 Donations are appreciated! You can support me via:
 
-* Dana: 081214827906
-* Gopay: 081214827906
-* Ovo: 081214827906
+* Toncoin : UQCh0wyU8uEmAl8Z3NvoU-jQK229V6aO8vTBznV0fcbc2djW
