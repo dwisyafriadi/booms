@@ -249,53 +249,60 @@ def countdown_timer(seconds):
 
 
 def main():
-    # Read query_ids from tgWebAppData.txt
-    try:
-        with open('tgWebAppData.txt', 'r') as file:
-            query_list = [line.strip() for line in file.readlines()]
-        print(f"Query List: {query_list}")  # Debug print to check the queries
-    except FileNotFoundError:
-        print(f"{Fore.RED}File tgWebAppData.txt tidak ditemukan.")
-        return
+    while True:  # Start an infinite loop to rerun the tasks
+        # Read query_ids from tgWebAppData.txt
+        try:
+            with open('tgWebAppData.txt', 'r') as file:
+                query_list = [line.strip() for line in file.readlines()]
+            print(f"Query List: {query_list}")  # Debug print to check the queries
+        except FileNotFoundError:
+            print(f"{Fore.RED}File tgWebAppData.txt tidak ditemukan.")
+            return
 
-    # Prompt for auto upgrades and refill only once
-    auto_upgrade = input("Do you want to automatically upgrade energy_limit and multitap? (y/n): ").strip().lower() == 'y'
-    auto_refill = input("Do you want to automatically refill energy? (y/n): ").strip().lower() == 'y'
+        # Prompt for auto upgrades and refill only once
+        auto_upgrade = input("Do you want to automatically upgrade energy_limit and multitap? (y/n): ").strip().lower() == 'y'
+        auto_refill = input("Do you want to automatically refill energy? (y/n): ").strip().lower() == 'y'
 
-    for current_index, query_id in enumerate(query_list):
-        print(f"Processing query ID: {query_id}")  # Debug print
-        
-        # Get new token
-        token = get_new_token(query_id)
-        if token:
-            print(f"Token obtained for query ID: {query_id}")  # Debug print
+        for current_index, query_id in enumerate(query_list):
+            print(f"Processing query ID: {query_id}")  # Debug print
             
-            # Get user info
-            user_info = get_user_info(token)
-            if user_info:
-                print(f"\n{Fore.GREEN}User Info: {user_info}")
+            # Get new token
+            token = get_new_token(query_id)
+            if token:
+                print(f"Token obtained for query ID: {query_id}")  # Debug print
+                
+                # Get user info
+                user_info = get_user_info(token)
+                if user_info:
+                    print(f"\n{Fore.GREEN}User Info: {user_info}")
+                else:
+                    print(f"{Fore.RED}Failed to retrieve user info.")
+
+                # Claim daily reward
+                daily_reward(token)
+                
+                # Upgrade tap
+                upgrade_tap(token, auto_upgrade, auto_refill)
+
+                # Clear tasks
+                clear_task(token)  # Uncomment if you want to clear tasks after claiming daily rewards
+                
+                # Play tap
+                next_index = play_tap(token, query_list, current_index)
+                if next_index > current_index:
+                    current_index = next_index  # Update to the next index if necessary
+
             else:
-                print(f"{Fore.RED}Failed to retrieve user info.")
+                print(f"{Fore.RED}No token available for query ID: {query_id}, cannot proceed.")
 
-            # Claim daily reward
-            daily_reward(token)
-            
-            # Upgrade tap
-            upgrade_tap(token, auto_upgrade, auto_refill)
+        # Countdown for 1 hour (3600 seconds)
+        countdown_timer(3600)  # Call the countdown timer
 
-            # Clear tasks
-            clear_task(token)  # Uncomment if you want to clear tasks after claiming daily rewards
-            
-            # Play tap
-            next_index = play_tap(token, query_list, current_index)
-            if next_index > current_index:
-                current_index = next_index  # Update to the next index if necessary
-
-        else:
-            print(f"{Fore.RED}No token available for query ID: {query_id}, cannot proceed.")
-
-    # Countdown for 1 hour (3600 seconds)
-    countdown_timer(3600)  # Call the countdown timer
+        # Optional: Ask user if they want to restart the process
+        restart = input("Do you want to rerun the automation? (y/n): ").strip().lower()
+        if restart != 'y':
+            print("Exiting the automation.")
+            break  # Exit the loop if the user does not want to restart
 
 if __name__ == "__main__":
     init()  # Initialize colorama
