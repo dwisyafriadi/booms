@@ -249,7 +249,13 @@ def countdown_timer(seconds):
 
 
 def main():
-    while True:  # Start an infinite loop to rerun the tasks
+    while True:  # Start an infinite loop for automation
+        # Ask the user if they want to rerun the automation
+        restart = input("Do you want to rerun the automation? (y/n): ").strip().lower()
+        if restart != 'y':
+            print("Exiting the automation.")
+            break  # Exit the loop if the user does not want to restart
+
         # Read query_ids from tgWebAppData.txt
         try:
             with open('tgWebAppData.txt', 'r') as file:
@@ -297,12 +303,6 @@ def main():
 
         # Countdown for 1 hour (3600 seconds)
         countdown_timer(3600)  # Call the countdown timer
-
-        # Optional: Ask user if they want to restart the process
-        restart = input("Do you want to rerun the automation? (y/n): ").strip().lower()
-        if restart != 'y':
-            print("Exiting the automation.")
-            break  # Exit the loop if the user does not want to restart
 
 if __name__ == "__main__":
     init()  # Initialize colorama
